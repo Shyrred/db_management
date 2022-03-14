@@ -24,23 +24,23 @@ class Database
         return self::$pdo;
     }
 
-    public function getDbInfos($whatYouSearch,$secondInfoYouSearch): array
+    public function getDbInfos($inWhatTable, $whatInfoYouSearch,$secondInfoYouSearch): array
     {
-        settype($whatYouSearch, "string");
+        settype($whatInfoYouSearch, "string");
         settype($secondInfoYouSearch, "string");
-        $tableQuery = 'SELECT * FROM `projet_bdd`.utilisateurs';
+        $tableQuery = 'SELECT * FROM `projet_bdd`.'.$inWhatTable.'';
         $stmt = $this->getDatabase()->prepare($tableQuery);
         $stmt->execute();
         $infos = $stmt->fetchAll();
 
         if ($secondInfoYouSearch === '') {
             foreach ($infos as $info) {
-                $tableInfo[] = $info[$whatYouSearch];
+                $tableInfo[] = $info[$whatInfoYouSearch];
             }
         }
         else {
             foreach ($infos as $info) {
-                $tableInfo[] = ($info[$whatYouSearch].' '.$info[$secondInfoYouSearch]);
+                $tableInfo[] = ($info[$whatInfoYouSearch].' '.$info[$secondInfoYouSearch]);
             }
         }
         return $tableInfo;
