@@ -7,7 +7,7 @@ require_once "DatabaseModel.php";
  * contains all the methods to interact with database (for users only)
  */
 
-class UserModel extends Database
+class UserModels extends Database
 {
     /**
      * insert a new user in the database
